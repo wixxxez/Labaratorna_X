@@ -5,3 +5,15 @@
     height: 100px;
     
 }
+
+.figure {
+    height: 90px;
+    width: 90px;
+}
+.images-box {
+    width: 90px;
+    height: 90px;
+}
+.col-4:hover {
+    border: 5px solid green!important;
+}
