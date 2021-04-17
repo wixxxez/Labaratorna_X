@@ -207,6 +207,29 @@ class GameInterface extends MainGameClass {
         $('#WinnerText').text("Winner: "+winner+'('+figure+')');
         $('#ModalShow').trigger('click');
     }
+    PlayersMode($elem, g,gameInterface){
+        if((!gameInterface.getFreezeStatus() && ($elem.find('img').attr('class')!='images-box' ))) {
+        $elem.find('.figure').html('<img src="images/'+figure+'.png" class="images-box"alt="">');
+        var fig = g.move(figure,$elem.find('.figure').attr('id'))
+        gameInterface.setPlayerStatus(gameInterface.getPlayerLog());
+        
+        if(g.findCombination(fig)){
+            gameInterface.setFreezeStatus(true);
+            gameInterface.showWinner(figure);
+        }
+        if(figure=='o'){
+            figure='x'
+        }
+        else {
+            figure='o'
+        }
+        
+        gameInterface.setPlayerLog(gameInterface.getPlayerLog()+1);
+        }
+    }
+    //AIMode(){
+    //    
+    //}
 }
 
 figure="o";
@@ -226,26 +249,15 @@ $('#AIMode').click(function(){
 })
 $('.col-4').click(function(){
     var $elem =  $(this)
-  
- 
-    if((!gameInterface.getFreezeStatus() && ($elem.find('img').attr('class')!='images-box' ))) {
-        $elem.find('.figure').html('<img src="images/'+figure+'.png" class="images-box"alt="">');
-        var fig = g.move(figure,$elem.find('.figure').attr('id'))
-        gameInterface.setPlayerStatus(gameInterface.getPlayerLog());
-        
-        if(g.findCombination(fig)){
-            gameInterface.setFreezeStatus(true);
-            gameInterface.showWinner(figure);
-        }
-        if(figure=='o'){
-            figure='x'
-        }
-        else {
-            figure='o'
-        }
-        
-        gameInterface.setPlayerLog(gameInterface.getPlayerLog()+1);
+    if(g.getGameMode()=="2 Players"){
+        gameInterface.PlayersMode($elem,g,gameInterface) 
     }
+    if(g.getGameMode()=="Play vs AI"){
+        if((!gameInterface.getFreezeStatus() && ($elem.find('img').attr('class')!='images-box' ))){
+            
+        }
+    }
+    
 })
 $('#NewGame').click(function(){
     
