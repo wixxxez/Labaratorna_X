@@ -227,9 +227,26 @@ class GameInterface extends MainGameClass {
         gameInterface.setPlayerLog(gameInterface.getPlayerLog()+1);
         }
     }
-    //AIMode(){
-    //    
-    //}
+    AIMode(id, g,gameInterface){
+        if((!gameInterface.getFreezeStatus() )) {
+        $("#"+id).html('<img src="images/'+figure+'.png" class="images-box"alt="">');
+        var fig = g.move(figure,id)
+        gameInterface.setPlayerStatus(gameInterface.getPlayerLog());
+        
+        if(g.findCombination(fig)){
+            gameInterface.setFreezeStatus(true);
+            gameInterface.showWinner(figure);
+        }
+        if(figure=='o'){
+            figure='x'
+        }
+        else {
+            figure='o'
+        }
+        
+        gameInterface.setPlayerLog(gameInterface.getPlayerLog()+1);
+        }
+    }
 }
 
 figure="o";
@@ -258,10 +275,9 @@ $('.col-4').click(function(){
            gameInterface.PlayersMode($elem,g,gameInterface);
             ai.setPole(g.getGamePole());
             //ai move
-            $element=$(ai.convertIntoId(ai.checkGamePole()))
-            console.log($element)
-            console.log(figure)
-            gameInterface.PlayersMode($element,g,gameInterface) 
+            var id=ai.convertIntoId(ai.checkGamePole())
+            console.log(id)
+            gameInterface.AIMode(id,g,gameInterface) 
         }
     }
     

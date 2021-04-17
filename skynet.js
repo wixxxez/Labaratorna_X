@@ -146,13 +146,13 @@ class PseudoSkyNet extends ShemaMachine {
     
     convertIntoId(arr){ //arr[y,x]
         if(arr[0]==0){
-            return '#f'+parseInt(arr[0]+arr[1]+1);//1-3 0+1+1 =2 
+            return 'f'+parseInt(arr[0]+arr[1]+1);//1-3 0+1+1 =2 
         }
         if(arr[0]==1){
-            return '#f'+parseInt(arr[0]+arr[1]+3);
+            return 'f'+parseInt(arr[0]+arr[1]+3);
         }
         if(arr[0]==2){
-            return '#f'+parseInt(arr[0]+arr[1]+5);
+            return 'f'+parseInt(arr[0]+arr[1]+5);
         }
         
     }
