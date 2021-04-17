@@ -3,8 +3,8 @@
 ------------TODO-----------
     Get data is 2d array:
         [ 
-            [ 1,0,0 ] //9 x
-            [ 2,0,0 ] //9 y
+            [ 1,0,0 ] //9 x arr = [0 , 1], arr = [x,y] arr[0]=>x 1-9 // +1//2+2+5
+            [ 2,0,0 ] //9 y arr = [1,1]
             [ 1,0,0 ] //6 d
         ]
         [ 
@@ -51,9 +51,9 @@ class ShemaMachine {
       return Math.floor(Math.random() * (max - min + 1)) + min;
     }
     getRandomPos(){
-       GameArray = this.pole;
-        x = this.getRandomIntInclusive(0,2);
-        y=this.getRandomIntInclusive(0,2);
+       var GameArray = this.pole;
+        var x = this.getRandomIntInclusive(0,2);
+        var y=this.getRandomIntInclusive(0,2);
         if(GameArray[x][y]!=2){
             return this.getRandomPos();
         }
@@ -62,7 +62,7 @@ class ShemaMachine {
         }
     }
     checkGamePole(){
-        GameArray=this.pole;
+        var GameArray=this.pole;
         var Combi0 =0; //0
         var Combi=0; //x
         var EmptyBox=0;
@@ -128,7 +128,7 @@ class ShemaMachine {
             CombiY=0;
         }
         
-        return this.getRandomPos();//[figure,id(position)]
+        return this.getRandomPos();//return [x,y]
     }
 }
 class PseudoSkyNet extends ShemaMachine {
@@ -144,5 +144,33 @@ class PseudoSkyNet extends ShemaMachine {
         return this.pole;
     }
     
-    
+    convertIntoId(arr){ //arr[y,x]
+        if(arr[0]==0){
+            return '#f'+parseInt(arr[0]+arr[1]+1);//1-3 0+1+1 =2 
+        }
+        if(arr[0]==1){
+            return '#f'+parseInt(arr[0]+arr[1]+3);
+        }
+        if(arr[0]==2){
+            return '#f'+parseInt(arr[0]+arr[1]+5);
+        }
+        
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

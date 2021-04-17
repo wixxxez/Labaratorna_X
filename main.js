@@ -235,6 +235,7 @@ class GameInterface extends MainGameClass {
 figure="o";
 var g = new Game("2 Players");
 var gameInterface = new GameInterface(g.getGameMode());
+var ai = new PseudoSkyNet(g.getGamePole());
 $('#p2Mode').click(function(){
     g = new Game("2 Players");
     
@@ -254,7 +255,13 @@ $('.col-4').click(function(){
     }
     if(g.getGameMode()=="Play vs AI"){
         if((!gameInterface.getFreezeStatus() && ($elem.find('img').attr('class')!='images-box' ))){
-            
+           gameInterface.PlayersMode($elem,g,gameInterface);
+            ai.setPole(g.getGamePole());
+            //ai move
+            $element=$(ai.convertIntoId(ai.checkGamePole()))
+            console.log($element)
+            console.log(figure)
+            gameInterface.PlayersMode($element,g,gameInterface) 
         }
     }
     
