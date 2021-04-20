@@ -59,9 +59,10 @@ class ShemaMachine {
         }
         else {
             return [x,y];
+      
         }
     }
-    checkGamePole(){
+    checkDiagonali(){
         var GameArray=this.pole;
         var Combi0 =0; //0
         var Combi=0; //x
@@ -70,8 +71,6 @@ class ShemaMachine {
             if(GameArray[i][i]==1){
                 Combi=Combi+1;
             }
-            
-        
             if(GameArray[i][i]==2){
                 EmptyBox=[ i, i];
             }
@@ -83,18 +82,22 @@ class ShemaMachine {
         if(Combi==2 || Combi0 == 2){
             return EmptyBox;
         }
-        Combi0=0;
-        EmptyBox=0;
-        Combi = 0;
+        else{return 0};
+    }
+    checkReverseDiagonal(){
+        var GameArray=this.pole;
+        var Combi0 =0; //0
+        var Combi=0; //x
+        var EmptyBox=0;
         var j=0
         for(var i = 2; i >= 0; i--){ //reverse for 
             if(GameArray[j][i]==1){
                 Combi=Combi+1;
             }
-            if(GameArray[i][i]==2){
-                EmptyBox=[ i,i];
+            if(GameArray[j][i]==2){
+                EmptyBox=[ j,i];
             }
-            if(GameArray[i][i]==0){
+            if(GameArray[j][i]==0){
                 Combi0=Combi0+1;
             }
             j++;
@@ -102,33 +105,82 @@ class ShemaMachine {
         if(Combi==2 || Combi0 == 2){
             return EmptyBox;
         }
+        else{return 0};
+    }
+    chekcXY(){
+        var GameArray=this.pole;
         var CombiX = 0;
+        var CombiX1 = 0;
         var CombiY = 0;
-        var CombiX0 = 0;
-        var CombiY0 = 0;
+        var CombiY1 = 0;
+        var EmptyBox = 0;
         for (var i = 0;i<3;i++){
+            EmptyBox = 0;
             for(var j = 0;j<3;j++){
-                if(GameArray[i][j]==1 || GameArray[i][j]==0){
+                if(GameArray[i][j]==0){
                     CombiX++;
                 }
-                if(GameArray[j][i]==1 || GameArray[j][i]==0){
-                    CombiY++;
+                if(GameArray[i][j]==1 == 1){
+                    CombiX1++;
                 }
-                if(GameArray[j][i] == 2){
-                    EmptyBox = [ j, i];
-                }
+                
                 if(GameArray[i][j] == 2){
                     EmptyBox = [i, j];
                 }
             }
-             if(CombiX==2 || CombiY == 2){
+             if(CombiX==2 || CombiX1==2){
                 return EmptyBox;
             }
+            
             CombiX=0;
+            
+        }
+        EmptyBox = 0;
+        for (var i = 0;i<3;i++){
+            EmptyBox=0;
+            for(var j = 0;j<3;j++){
+                
+                if(GameArray[j][i]==1 ){
+                    CombiY1++;
+                }
+                if(GameArray[j][i]==0){
+                    CombiY++;
+                }
+                if(GameArray[j][i] == 2){
+                    EmptyBox = [j, i];
+                    
+                }
+                
+            }
+             if( CombiY == 2 || CombiY1 == 2){
+                
+                return EmptyBox;
+            }
+            
+            
             CombiY=0;
         }
+        return 0;
+    }
+    checkGamePole(){
+        var x =  this.getRandomPos();
+        //console.log("x: "+x);
+        var diag  = this.checkDiagonali();
+        var RevD = this.checkReverseDiagonal();
+        var XandY = this.chekcXY();
+        if(diag!=0){
+            return diag;
+        }
+        if(RevD!=0){
+            return RevD;
+        }
+        if(XandY!=0){
+            return XandY;
+        }
+        else{
+          return x;//return [x,y]  
+        }
         
-        return this.getRandomPos();//return [x,y]
     }
 }
 class PseudoSkyNet extends ShemaMachine {

@@ -275,9 +275,12 @@ $('.col-4').click(function(){
            gameInterface.PlayersMode($elem,g,gameInterface);
             ai.setPole(g.getGamePole());
             //ai move
-            var id=ai.convertIntoId(ai.checkGamePole())
-            console.log(id)
-            gameInterface.AIMode(id,g,gameInterface) 
+            setTimeout(function(){
+                var id=ai.convertIntoId(ai.checkGamePole())
+                
+                gameInterface.AIMode(id,g,gameInterface) 
+            },250)
+            
         }
     }
     
